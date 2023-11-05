@@ -1,0 +1,5 @@
+
+Nombre,Apellido,Telefono,Direccion,Email,Persona Adiconal,Fecha pertinente,Sitio web,Empresa
+Leonel,Messi,9999999-Movil,Buenos Aires-casa,@eeeee-Trabajo,ninguno,null-cumpleaños,ninguno,ninguno
+Zlatan,Ibrahamovich,5555555-Movil,Suecia-casa,@eeeee-Trabajo,ninguno,null-cumpleaños,ninguno,ninguno
+Neymar,Da Silva,Movil-444444,Casa-Bramas,@neymar10-Casa,ninguno,2023-11-10-Aniversario,ninguno,ninguno

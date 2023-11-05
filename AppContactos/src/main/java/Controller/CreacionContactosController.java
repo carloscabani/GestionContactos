@@ -6,8 +6,11 @@ package Controller;
 
 import Clases.*;
 import static Controller.ListaContactosController.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -41,6 +44,7 @@ public class CreacionContactosController implements Initializable {
     TextField tperContacto = new TextField();
     TextField tempresa = new TextField();
     TextField tsitioweb = new TextField();
+    //DatePicker dateTarjeta = new DatePicker();
     
     @FXML
     private TextField txnombre;
@@ -85,6 +89,7 @@ public class CreacionContactosController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cbtelefono.setValue("");
         
         cargarEtiquetas();
         guardarDatos();
@@ -97,12 +102,19 @@ public class CreacionContactosController implements Initializable {
         btguardar.setOnAction((ActionEvent e) -> {
             String Nombre = txnombre.getText();
             String Apellido = txapellido.getText();
-            String Tel = txtelefono.getText();
-            String direccion = txdireccion.getText();
+            Telefono Tel = new Telefono (txtelefono.getText(),cbtelefono.getValue());
+            Direccion di = new Direccion(txdireccion.getText(),cbdireccion.getValue());
+            Email em= new Email(cbemail.getValue(),txemail.getText());
+            PersonaAdiconal per=new PersonaAdiconal((String) c1.getValue(),tperContacto.getText());
             
-            Contacto c= new Contacto(Nombre,Tel,direccion);
+            LocalDate fecha = txcalendario.getValue();
+            Fecha fech= new Fecha(cbfecha.getValue(),fecha);
+            String web=tsitioweb.getText();
+            String Empresa= tempresa.getText();
             
-            ListaContactosController.lstcontactos.add(c);
+            Contacto c= new Contacto(Nombre,Apellido,Tel,di,em,per,fech,web,Empresa);
+            listaContacts.add(c);
+            EscribirArchivo();
             
             txnombre.clear();
             txapellido.clear();
@@ -117,9 +129,11 @@ public class CreacionContactosController implements Initializable {
             cbtelefono.setValue("");
             cbemail.setValue("");
             cbfecha.setValue("");
-           
-            //contenerdorList.getChildren().clear();
-            //ListaContactosController.listContactos.getItems().clear();
+//            cbdireccion.getItems().clear();
+//            cbtelefono.getItems().clear();
+//            cbemail.getItems().clear();
+//            cbfecha.getItems().clear();
+//            c1.getItems().clear();
 
         });
     }
@@ -179,21 +193,31 @@ public class CreacionContactosController implements Initializable {
         
           
     }
-    
-    public void cargarCombobox(){
-        for(String s:etiqueta2){
-            cbdireccion.getItems().add(s);
-            cbemail.getItems().add(s);
+
+    public void cargarCombobox() {
+
+        if (cbdireccion.getItems().isEmpty() && cbemail.getItems().isEmpty()) {
+            for (String s : etiqueta2) {
+                cbdireccion.getItems().add(s);
+                cbemail.getItems().add(s);
+            }
         }
-        for(String p:etiqueta1){
-            cbtelefono.getItems().add(p);
+        if (cbtelefono.getItems().isEmpty()) {
+            for (String p : etiqueta1) {
+                cbtelefono.getItems().add(p);
+            }
         }
-        for(String a:etiqueta3){
-            cbfecha.getItems().add(a);
+        if (cbfecha.getItems().isEmpty()) {
+            for (String a : etiqueta3) {
+                cbfecha.getItems().add(a);
+            }
         }
-        for(String b:etiqueta4){
-            c1.getItems().add(b);
+        if (c1.getItems().isEmpty()) {
+            for (String b : etiqueta4) {
+                c1.getItems().add(b);
+            }
         }
+
     }
 
     @FXML
@@ -201,6 +225,34 @@ public class CreacionContactosController implements Initializable {
         hbpercontacto.getChildren().clear();
         hbsitioweb.getChildren().clear();
         hbempresa.getChildren().clear();
+    }
+    
+    public void EscribirArchivo(){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Contactos.txt",true))) {
+            // Escribir encabezados (opcional)
+            writer.write("Nombre,Apellido,Telefono,Direccion,Email,Persona Adiconal,Fecha pertinente,Sitio web,Empresa");
+            writer.newLine();
+
+            // Escribir los datos de los estudiantes
+            for (Contacto c : listaContacts) {
+                if (tperContacto.getText().equals("") && tsitioweb.getText().equals("") && tempresa.getText().equals("")) {
+                    writer.write(c.getNombre() + "," + c.getApellido() + "," + c.getTlf().getTlf() + "-" + c.getTlf().getTipoTlf() + ","
+                            + c.getDir().getUbicacion() + "-" + c.getDir().getTipoDireccion() + "," + c.getEmail().getDireccion() + "-"
+                            + c.getEmail().getTipo() + "," + "ninguno" + "," + c.getFecha().getFecha()
+                            + "-" + c.getFecha().getTipoFecha() + "," + "ninguno" + "," + "ninguno");
+                } else {
+                    writer.write(c.getNombre() + "," + c.getApellido() + "," + c.getTlf().getTlf() + "-" + c.getTlf().getTipoTlf() + ","
+                            + c.getDir().getUbicacion() + "-" + c.getDir().getTipoDireccion() + "," + c.getEmail().getDireccion() + "-"
+                            + c.getEmail().getTipo() + "," + c.getPer().getPersona() + "-" + c.getPer().getTipoPersona() + "," + c.getFecha().getFecha()
+                            + "-" + c.getFecha().getTipoFecha() + "," + c.getWeb() + "," + c.getEmpresa());
+
+                }
+
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     

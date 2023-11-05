@@ -14,23 +14,45 @@ public class Contacto {
     
     private String nombre;
     
-    private String tlf;
+    private String apellido;
+    
+    private Telefono tlf;
   
-    private String dir;
+    private Direccion dir;
     
     private Email email;
     
-    private List<Contacto> numerosTlf; 
+    private PersonaAdiconal per; 
+
     
-    private List<Fecha> fechas;
+    private Fecha fecha;
     
-    private List<Foto> listaFotos;
+    private String web;
     
-    private List<Contacto> contactosRelacionados;
+    private String empresa;
+
+    public Contacto(String nombre, String apellido, Telefono tlf, Direccion dir, Email email, PersonaAdiconal per, Fecha fecha, String web, String empresa) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tlf = tlf;
+        this.dir = dir;
+        this.email = email;
+        this.per = per;
+        this.fecha = fecha;
+        this.web = web;
+        this.empresa = empresa;
+    }
     
-    public void anadirContactoRel(Contacto c){
-        this.contactosRelacionados.add(c);
-        c.contactosRelacionados.add(this);
+    
+    
+    
+    
+    public PersonaAdiconal getPer() {
+        return per;
+    }
+
+    public void setPer(PersonaAdiconal per) {
+        this.per = per;
     }
 
     public String getNombre() {
@@ -41,19 +63,27 @@ public class Contacto {
         this.nombre = nombre;
     }
 
-    public String getTlf() {
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public Telefono getTlf() {
         return tlf;
     }
 
-    public void setTlf(String tlf) {
+    public void setTlf(Telefono tlf) {
         this.tlf = tlf;
     }
 
-    public String getDir() {
+    public Direccion getDir() {
         return dir;
     }
 
-    public void setDir(String dir) {
+    public void setDir(Direccion dir) {
         this.dir = dir;
     }
 
@@ -65,56 +95,33 @@ public class Contacto {
         this.email = email;
     }
 
-    public List<Contacto> getNumerosTlf() {
-        return numerosTlf;
+    public Fecha getFecha() {
+        return fecha;
     }
 
-    public void setNumerosTlf(List<Contacto> numerosTlf) {
-        this.numerosTlf = numerosTlf;
+    public void setFecha(Fecha fecha) {
+        this.fecha = fecha;
     }
 
-    public List<Fecha> getFechas() {
-        return fechas;
+    public String getWeb() {
+        return web;
     }
 
-    public void setFechas(List<Fecha> fechas) {
-        this.fechas = fechas;
+    public void setWeb(String web) {
+        this.web = web;
     }
 
-    public List<Foto> getListaFotos() {
-        return listaFotos;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setListaFotos(List<Foto> listaFotos) {
-        this.listaFotos = listaFotos;
-    }
-
-    public List<Contacto> getContactosRelacionados() {
-        return contactosRelacionados;
-    }
-
-    public void setContactosRelacionados(List<Contacto> contactosRelacionados) {
-        this.contactosRelacionados = contactosRelacionados;
-    }
-
-    //constructor
-    public Contacto(String nombre, String tlf, String dir, Email email, List<Contacto> numerosTlf, List<Fecha> fechas, List<Foto> listaFotos, List<Contacto> contactosRelacionados) {
-        this.nombre = nombre;
-        this.tlf = tlf;
-        this.dir = dir;
-        this.email = email;
-        this.numerosTlf = numerosTlf;
-        this.fechas = fechas;
-        this.listaFotos = listaFotos;
-        this.contactosRelacionados = contactosRelacionados;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
     
-    public Contacto(String nombre, String tlf, String dir) {
-        this.nombre = nombre;
-        this.tlf = tlf;
-        this.dir = dir;
+    
+    
 
-    }
 
     @Override
     public String toString() {

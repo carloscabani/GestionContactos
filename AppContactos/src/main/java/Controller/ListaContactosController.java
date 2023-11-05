@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -37,6 +38,7 @@ public class ListaContactosController implements Initializable {
     
     // ArrayList del pauqete de java porque falta hacer el metodo Iterable en la listGroup9
     public static ArrayList<Contacto> lstcontactos = new ArrayList<>();
+    public static ArrayList<Contacto> listaContacts = new ArrayList<>();
     public static ListView<String> listContactos = new ListView<>();
     public static VBox contenerdorList = new VBox();
 
@@ -59,9 +61,12 @@ public class ListaContactosController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        lstcontactos.add(new Contacto("messi","55555","Buneos Aires"));
-        lstcontactos.add(new Contacto("Ronaldo","55555","Buneos Aires"));
+        LocalDate ler = null ;
+        listaContacts.add(new Contacto("Leonel","Messi",new Telefono("Movil","9999999"),new Direccion("casa","Buenos Aires"),new Email("Trabajo","@eeeee"),new PersonaAdiconal("PEPE","Hijo"), new Fecha("cumpleaños",ler),"facebook","Banco Guayaquil"));
+        listaContacts.add(new Contacto("Zlatan","Ibrahamovich",new Telefono("Movil","5555555"),new Direccion("casa","Suecia"),new Email("Trabajo","@eeeee"),new PersonaAdiconal("PEPE","Hijo"), new Fecha("cumpleaños",ler),"facebook","Banco Guayaquil"));
+
+        //lstcontactos.add(new Contacto("messi","55555","Buneos Aires"));
+        //lstcontactos.add(new Contacto("Ronaldo","55555","Buneos Aires"));
         contenerdorList.getChildren().clear();
         //cargarContactos();
         
@@ -95,7 +100,7 @@ public class ListaContactosController implements Initializable {
         if (listContactos != null) {
             listContactos.getItems().clear();
 
-            for (Contacto c : lstcontactos) {
+            for (Contacto c : listaContacts) {
                 
                 listContactos.getItems().add(c.getNombre());
             }
