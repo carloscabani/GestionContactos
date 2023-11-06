@@ -1,6 +1,15 @@
 Clases\RedSocial.class
+Controller\ListaContactosController.class
 Controller\PrimaryController.class
+ListTDA\main.class
+Clases\Fecha.class
+Clases\Contacto.class
 Controller\CreacionContactosController.class
+Clases\Telefono.class
+Clases\Email.class
 Controller\App.class
+Clases\PersonaAdiconal.class
 ListTDA\Node.class
+ListTDA\ListGroup9.class
+Clases\Direccion.class
 ListTDA\ArrayListGroup9.class
