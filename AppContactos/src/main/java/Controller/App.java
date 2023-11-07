@@ -22,7 +22,6 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 462, 598);
         stage.setScene(scene);
-        stage.getIcons().add(new Image("file:Imagenes/icono.jpg"));
         stage.show();
     }
 
