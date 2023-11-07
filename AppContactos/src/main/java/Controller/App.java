@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.image.Image;
 
 /**
  * JavaFX App
@@ -21,6 +22,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 462, 598);
         stage.setScene(scene);
+        stage.getIcons().add(new Image("file:Imagenes/icono.jpg"));
         stage.show();
     }
 
